@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  {% load static %}
+  <link href="{% static 'main/css/output.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <div class="h-screen bg-bezh flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 text-kok-900 pb-36">
+        <div class="max-w-md w-full space-y-8">
+          <div>
+            <svg width="314" height="504" viewBox="0 0 314 504" class="mx-auto h-28 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M313.896 258.576V177.606C313.896 137.05 312.771 98.5421 287.111 63.6479C239.071 -1.68034 140.371 -20.0562 69.2738 24.1826C43.6621 40.1187 24.824 62.8492 12.2443 88.6387C-0.00614452 113.753 -0.00300615 141.376 9.88796e-05 168.329L0.000164944 258.576L156.948 156.614L313.896 258.576ZM186.317 444.537C186.943 447.634 187.642 451.097 188.441 455.004C132.831 464.68 78.7391 450.287 40.3365 411.02C10.7058 380.723 0.103688 342.963 0.103688 303.06V271.284L28.2461 251.579L57.4709 231.586V267.073C57.4709 272.008 57.3827 276.944 57.2948 281.867C56.762 311.677 56.2374 341.034 75.3511 367.036C93.7212 392.027 116.899 405.022 142.981 407.522C148.941 407.831 151.216 407.949 153.492 407.994C154.896 408.021 156.3 408.021 158.572 408.021C164.525 408.021 167.772 407.521 174.897 406.139C181.19 419.141 181.983 423.07 186.317 444.537ZM256.69 264.157C256.4 252.407 256.135 241.666 256.633 233.086C314 271.072 314 271.072 314 271.072V306.059C314 345.714 301.553 385.184 270.7 414.019C269.911 414.755 269.114 415.51 268.305 416.274L268.271 416.306L268.263 416.314C261.639 422.576 254.296 429.519 245.809 433.012C247.39 438.196 248.672 443.624 249.966 449.104L249.967 449.106C253.085 462.308 256.277 475.821 263.897 486.992C266.784 491.225 270.808 493.938 274.733 496.584C278.035 498.81 281.266 500.989 283.693 503.986C282.475 503.986 281.258 503.99 280.042 503.993C268.116 504.027 256.291 504.061 244.726 500.782C209.256 490.722 200.806 457.649 192.804 426.335C189.69 414.145 186.643 402.222 182.098 392.027C177.532 381.789 172.446 371.412 164.43 363.039C162.472 360.995 159.997 359.226 157.52 357.456C153.976 354.924 150.428 352.389 148.393 349.043C150.104 349.01 151.803 348.969 153.49 348.927C169.881 348.526 185.194 348.151 200.348 356.272C207.51 360.112 213.608 365.121 218.82 371.035C219.233 371.504 219.693 372.134 220.196 372.824C221.841 375.08 223.954 377.976 226.438 377.976C229.558 377.976 232.456 374.524 234.485 372.106L234.491 372.099L234.523 372.061C234.737 371.806 234.942 371.562 235.136 371.336L235.219 371.24C235.279 371.17 235.339 371.101 235.397 371.035C241.959 363.585 247.18 355.139 250.499 346.044C258.13 322.476 257.346 290.735 256.69 264.157ZM159.113 226.588H186.173V251.579H159.113V226.588ZM186.173 256.577H159.113V281.568H186.173V256.577ZM127.723 226.588H154.784V251.579H127.723V226.588ZM154.784 256.577H127.723V281.568H154.784V256.577ZM256.561 179.135C256.697 133.973 256.734 121.559 244.066 98.6351C210.548 42.4396 119.484 35.9459 77.6733 87.6391C56.9987 113.2 57.1213 127.98 57.4223 164.284C57.4966 173.248 57.5818 183.524 57.3674 195.599L156.948 130.623L256.529 195.599C256.529 189.66 256.546 184.192 256.561 179.135Z" fill="#780000"/>
+            </svg>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-kok-900">Sign in to admin account</h2>
+          </div>
+
+          <form class="mt-8 space-y-9" action="{% url 'index'%}" method="POST">
+              {% csrf_token %}
+              <div class="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label for="username" class="sr-only">Username</label>
+                <input id="username" name="username" type="text" class="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-kok-900 focus:z-10 sm:text-sm" placeholder="Username" />
+              </div>
+              <div>
+                <label for="password" class="sr-only">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-kok-900 focus:z-10 sm:text-sm" placeholder="Password" />
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-kyzyl-900 hover:bg-kok-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                </span>
+                Enter
+              </button>
+            </div>
+          </form>
+        </div>
+    </div>
+</body>
+</html>

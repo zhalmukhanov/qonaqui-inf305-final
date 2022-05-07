@@ -1,0 +1,96 @@
+{% extends 'main/base.html' %}
+
+{% block title %}History{% endblock %}
+
+{% block body %}
+    <div class="w-10/12">
+         <div class="h-16 border-b border-kok-900 flex align-center">
+            <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
+                <h5 hidden class="text-2xl text-kok-900 font-medium lg:block">History</h5>
+            </div>
+        </div>
+        <form action="{% url 'history' %}"
+              method="POST"class="w-11/12  mx-auto">
+            {% csrf_token %}
+            <div class="flex justify-end mt-20 mb-8">
+                <div class="flex items-center">
+                   <p class="text-kok-900 font-medium text-base">At</p>
+                   <input
+                        type="date"
+                        class="ml-3 block px-0. border rounded  border-kyzyl-900 focus:ring-0 focus:border-kok-900"
+                        id="at" name="at"/>
+                </div>
+
+                <div class="ml-5 flex items-center">
+                   <p class="text-kok-900 font-medium text-base">to</p>
+                   <input
+                        type="date"
+                        class="ml-3 block  px-0. border rounded  border-kyzyl-900 focus:ring-0 focus:border-kok-900"
+                        id="to" name="to"/>
+                </div>
+
+
+                <div class="ml-10 flex">
+                   <button class="bg-kyzyl-900 text-bezh font-medium px-3 py-2 rounded flex items-center hover:bg-kok-900">
+                      <svg viewBox="0 0 512 512" width="20px" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M472,168H40a24,24,0,0,1,0-48H472a24,24,0,0,1,0,48Z"/><path d="M392,280H120a24,24,0,0,1,0-48H392a24,24,0,0,1,0,48Z"/><path d="M296,392H216a24,24,0,0,1,0-48h80a24,24,0,0,1,0,48Z"/></svg>
+                      <span class="ml-1">Filter</span>
+                   </button>
+                </div>
+             </div>
+
+             <div class="max-w-full">
+                 {% if historys.first %}
+                <table class="table-auto w-full">
+                   <thead>
+                      <tr class="bg-kyzyl-900 text-center ">
+                         <th class="w-1/6 min-w-[160px] rounded-tl-lg text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                            Room number
+                         </th>
+                         <th class="w-1/6 min-w-[160px] text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                            Room class
+                         </th>
+                         <th class="w-1/6 min-w-[160px] text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                            Date entered
+                         </th>
+                         <th class="w-1/6 min-w-[160px] text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                            Date left
+                         </th>
+                         <th class="w-1/6 min-w-[160px] rounded-tr-lg text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                            Income
+                         </th>
+                   </thead>
+
+                   <tbody>
+                    {% for history in historys%}
+                        <tr>
+                            <td class="text-center text-kok-900 font-medium text-base py-3 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                            {{ history.registration.room.room_number }}
+                            </td>
+                            <td class="text-center text-kok-900 font-medium text-base py-3 px-2 bg-white border-b border-[#E8E8E8]">
+                            {{ history.registration.room.room_class }}
+                            </td>
+                            <td class="text-center text-kok-900 font-medium text-base py-3 px-2 bg-white border-b border-[#E8E8E8]">
+                            {{ history.registration.date_entered_format }}
+                            </td>
+                            <td class="text-center text-kok-900 font-medium text-base py-3 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                            {{ history.registration.date_left_format }}
+                            </td>
+                            <td class="text-center text-kok-900 font-medium text-base py-3 px-2 bg-white border-b border-r border-[#E8E8E8]">
+                            {{ history.cost }} $
+                            </td>
+                        </tr>
+                    {% endfor %}
+                   </tbody>
+
+                </table>
+                 {% else %}
+                    <p class="w-full text-center text-2xl text-kyzyl-900 py-4" colspan="6">
+                        Records not found
+                     </p>
+                    {% endif %}
+             </div>
+        </form>
+      </div>
+{% endblock %}
+
+

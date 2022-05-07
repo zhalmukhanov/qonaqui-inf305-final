@@ -1,0 +1,149 @@
+{% extends 'main/base.html' %}
+
+{% block title %}History{% endblock %}
+
+{% block body %}
+    <div class="w-10/12">
+        <div class="h-16 border-b border-kok-900 flex align-center">
+            <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
+                <h5 hidden class="text-2xl text-kok-900 font-medium lg:block">Registration room page</h5>
+            </div>
+        </div>
+        <div class="w-11/12  my-32 mx-auto">
+            <div class="flex justify-between items-">
+                <div class="mr-4 w-3/6 ">
+                    <div class=" flex justify-between items-center rounded-md px-8 py-8 min-h-min border border-gray-200 bg-white shadow">
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.room_number }}</span> Room number</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.room_class }}</span> Class</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.floor }}</span> Floor</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.room_amount }}</span>Room amount</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center px-4 bg-kyzyl-100 rounded "><span class="text-kyzyl-900 font-bold text-4xl">{{ room.ects }}</span>ECTS</p>
+                    </div>
+                    <div class="mt-8 rounded-md px-8 py-8 min-h-min border border-gray-200 bg-white shadow">
+                        <p class="text-kyzyl-900 font-medium text-2xl">Add client</p>
+
+                        <div class="mt-8">
+                            <form   action="{% url 'add_client' room.pk %}"
+                                    method="POST"
+                                    class="grid grid-cols-2 gap-6 content-around">
+                                {% csrf_token %}
+                                <div class="block">
+                                    <span class="text-kok-900">Client name</span>
+                                    <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                                    placeholder="Kairat"/>
+                                </div>
+                                <div class="block">
+                                    <span class="text-kok-900">Client surname</span>
+                                    <input
+                                    type="text"
+                                    id="surname"
+                                    name="surname"
+                                    class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                                    placeholder="Nurtas"/>
+                                </div>
+                                <div class="block">
+                                    <span class="text-kok-900">Email address</span>
+                                    <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black "
+                                    placeholder="kairat@suetolog.kz"
+                                    />
+                                </div>
+                                <div class="block">
+                                    <span class="text-kok-900">Phone number</span>
+                                    <input
+                                    type="text"
+                                    id="phone"
+                                    name="phone"
+                                    class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black "
+                                    placeholder="+7 708 708 78 78"
+                                    />
+                                </div>
+
+                                <div class="block">
+                                    <span class="text-kok-900">Gender</span>
+                                    <select id="gender" name="gender"
+                                            class="block w-full mt-0 px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <button class="justify-self-end bg-kyzyl-900 text-bezh font-medium px-6 ml-auto my-4 py-3 rounded flex items-center hover:bg-kok-900">
+                                      <p>Add client</p>
+                                     </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-4 w-3/6 px-8 py-8  rounded-md border border-gray-200 bg-white shadow">
+                    <p class="text-kyzyl-900 font-medium text-2xl">Clients</p>
+
+                    <div class="mt-5 w-full">
+                        {% if clients.first %}
+                        <table class="table-auto w-full">
+                           <thead>
+                              <tr class="bg-kyzyl-900 text-center text-bezh">
+                                <th class="rounded-tl-lg text-lg py-2 px-2 text-bezh  border-l border-transparent">
+                                    Name
+                                 </th>
+                                 <th class="text-lg py-2 px-2 border-l border-transparent">
+                                    Surname
+                                 </th>
+                                 <th class="text-lg py-2 px-2 border-l border-transparent">
+                                    Phone
+                                 </th>
+                                 <th class="text-lg py-2 px-2 border-l border-transparent">
+                                    Email
+                                 </th>
+                                 <th class="rounded-tr-lg text-lg py-2 px-2 border-l border-transparent">
+                                    Gender
+                                 </th>
+                           </thead>
+                           <tbody>
+                                {% for client in clients %}
+                                <tr>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                    {{ client.first_name }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                                    {{ client.last_name }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                    {{ client.phone }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                                    {{ client.email }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                    {{ client.gender }}
+                                 </td>
+                              </tr>
+                                {% endfor %}
+                           </tbody>
+                        </table>
+                        {% else %}
+                        <p class="text-center text-kok-900 text-xl">No clients yet</p>
+                        {% endif %}
+                     </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

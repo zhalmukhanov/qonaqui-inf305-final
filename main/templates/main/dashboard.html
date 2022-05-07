@@ -1,0 +1,159 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block body %}
+          <div class="w-10/12 mb-20">
+        <div class="h-16 border-b border-kok-900 flex align-center">
+            <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
+                <h5 hidden class="text-2xl text-kok-900 font-medium lg:block">Dashboard</h5>
+            </div>
+        </div>
+
+        <div class="w-11/12 mx-auto pt-20">
+            <div class="mx-auto flex">
+                <div class="w-5/12">
+                    <div class="h-full py-6 px-6 rounded-md border border-gray-200 bg-white shadow">
+                        <div class="mb-8 mt-2 flex flex-col items-center">
+                            <div style="--value:62" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" ></div>
+                            <p class="mt-6 text-xl text-kok-900 ">Occupancy rate</p>
+                        </div>
+                        <table class="mt-6 -mb-2 w-full text-kok-900">
+                            <tbody>
+                                <tr>
+                                    <td class="py-2">In presidential rooms</td>
+                                    <td class="text-kyzyl-900">28,8%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2">In luxury rooms</td>
+                                    <td class="text-kyzyl-900">67%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2">In family rooms</td>
+                                    <td class="text-kyzyl-900">45,6%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="w-7/12 flex justify-center">
+                    <div class="h-full ml-8 w-3/6 py-6 px-6 rounded-md border border-gray-200 bg-white shadow flex flex-col items-center justify-center">
+                        <div class="flex flex-col items-center mt-4">
+                            <h1 class="text-7xl font-medium text-kyzyl-900">64</h1>
+                            <p class="mt-2 text-xl text-kok-900 ">Available rooms</p>
+                        </div>
+                        <hr class="w-full border-kok-900 my-8 mt-14 mx-2">
+
+                        <div ><canvas id="chartjs-4" class="chartjs w-fu" width="undefined" height="undefined"></canvas>
+                            <script>
+                            new Chart(document.getElementById("chartjs-4"), {
+                                "type": "doughnut",
+                                "data": {
+                                    "labels": ["Lux", "Family", "Bisiness", "First class", "Honeymoon"],
+                                    "datasets": [{
+                                        "label": "Issues",
+                                        "data": [17, 23, 8, 11, 5],
+                                        "backgroundColor": ["#780000", "#FF7878", "#003049", "#4EBBF2", "#B8E7FF"]
+                                    }]
+                                }
+                            });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="h-full ml-8 w-3/6 py-6 px-6  rounded-md border border-gray-200 bg-white shadow flex flex-col items-center justify-center">
+                        <svg class="w-3/6 mt-7"  fill="#780000"  viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                            <path class="animate-vote2" d="M336,256c-20.56,0-40.44-9.18-56-25.84-15.13-16.25-24.37-37.92-26-61-1.74-24.62,5.77-47.26,21.14-63.76S312,80,336,80c23.83,0,45.38,9.06,60.7,25.52,15.47,16.62,23,39.22,21.26,63.63h0c-1.67,23.11-10.9,44.77-26,61C376.44,246.82,356.57,256,336,256Zm66-88h0Z"/>
+                            <path class="animate-vote1" d="M467.83,432H204.18a27.71,27.71,0,0,1-22-10.67,30.22,30.22,0,0,1-5.26-25.79c8.42-33.81,29.28-61.85,60.32-81.08C264.79,297.4,299.86,288,336,288c36.85,0,71,9,98.71,26.05,31.11,19.13,52,47.33,60.38,81.55a30.27,30.27,0,0,1-5.32,25.78A27.68,27.68,0,0,1,467.83,432Z"/>
+                            <path class="animate-vote2" d="M147,260c-35.19,0-66.13-32.72-69-72.93C76.58,166.47,83,147.42,96,133.45,108.86,119.62,127,112,147,112s38,7.66,50.93,21.57c13.1,14.08,19.5,33.09,18,53.52C213.06,227.29,182.13,260,147,260Z"/>
+                            <path class="animate-vote1" d="M212.66,291.45c-17.59-8.6-40.42-12.9-65.65-12.9-29.46,0-58.07,7.68-80.57,21.62C40.93,316,23.77,339.05,16.84,366.88a27.39,27.39,0,0,0,4.79,23.36A25.32,25.32,0,0,0,41.72,400h111a8,8,0,0,0,7.87-6.57c.11-.63.25-1.26.41-1.88,8.48-34.06,28.35-62.84,57.71-83.82a8,8,0,0,0-.63-13.39C216.51,293.42,214.71,292.45,212.66,291.45Z"/>
+                        </svg>
+
+                        <hr class="w-full border-kok-900 my-8 mt-7 mx-2">
+
+
+                        <div class="flex flex-col items-center mt-4">
+                            <p class="text-xl text-kok-900 ">Guests currently</p>
+                            <h1 class="mt-2 mb-14 text-7xl font-medium text-kyzyl-900">251</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mx-auto w-full mt-10 rounded-md border border-gray-200 bg-white shadow">
+                <div class="border-b p-3">
+                    <h5 class="font-bold uppercase text-kok-900">Revenue</h5>
+                </div>
+                <div class="p-5">
+                    <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined"></canvas>
+                    <script>
+                    new Chart(document.getElementById("chartjs-1"), {
+                        "type": "bar",
+                        "data": {
+                            //
+                            "labels": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "07.05.2022"],
+                            "datasets": [{
+                                "label": "Revenue",
+                                "data": [6500, 5900, 4000, 5000, 5600, 7800, 8900],
+                                "fill": false,
+                                "backgroundColor": ["rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)",],
+                                "borderColor": ["#780000", "#780000", "#780000","#780000","#780000","#780000","#780000",],
+                                "borderWidth": 1
+                            }]
+                        },
+                        "options": {
+                            "scales": {
+                                "yAxes": [{
+                                    "ticks": {
+                                        "beginAtZero": true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+      </div>
+
+          <style>
+      @keyframes growProgressBar {
+        0% { --pgPercentage: 0; }
+        80% { --pgPercentage: var(--value / 2); }
+        100% { --pgPercentage: var(--value); }
+        }
+
+        @property --pgPercentage {
+        syntax: '<number>';
+        inherits: false;
+        initial-value: 0;
+        }
+
+        div[role="progressbar"] {
+        --size: 13rem;
+        --fg: #780000;
+        --bg: #B8E7FF;
+        --pgPercentage: var(--value);
+        animation: growProgressBar 1s 1 forwards;
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background:
+            radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+            conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0)
+            ;
+        font-size: calc(var(--size) / 3.8);
+        font-weight: 700;
+        color: var(--fg);
+        }
+
+        div[role="progressbar"]::before {
+        counter-reset: percentage var(--value);
+        content: counter(percentage) '%';
+        }
+  </style>
+
+{% endblock %}

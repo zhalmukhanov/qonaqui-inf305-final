@@ -1,0 +1,249 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Rooms{% endblock %}
+
+{% block body %}
+   <div class="w-10/12">
+         <div class="h-16 border-b border-kok-900 flex align-center">
+            <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
+                <h5 hidden class="text-2xl text-kok-900 font-medium lg:block">Rooms</h5>
+            </div>
+        </div>
+        <section class="bg-white py-20">
+            <div class="w-11/12  mx-auto">
+
+               <div class="flex justify-between items-center mb-8">
+                  <button onclick="showMenu()" class="bg-kyzyl-900 text-bezh font-medium px-3 py-2 rounded hover:bg-kok-900">
+                    + Add new room
+                  </button>
+
+                  <form   action="{% url 'rooms' %}" method="POST"
+                          class="flex justify-end ">
+                      {% csrf_token %}
+                     <div class="flex items-center">
+                        <p class="text-kok-900 font-medium text-base">Status</p>
+                        <select id="status" name="status"
+                                class="ml-2 rounded border block border-kyzyl-900 text-kok-900 focus:border-kok-900">
+                           <option>All</option>
+                           <option value="A">Available</option>
+                           <option value="N">Not available</option>
+                        </select>
+                     </div>
+
+                     <div class="ml-5 flex items-center">
+                        <p class="text-kok-900 font-medium text-base">Class</p>
+                        <select id="class" name="class"
+                             class="ml-2 rounded border block border-kyzyl-900 text-kok-900 focus:border-kok-900">
+                                <option>All</option>
+                                <option value="4">Bisiness</option>
+                                <option value="3">Lux</option>
+                                <option value="5">Family</option>
+                                <option value="6">First class</option>
+                                <option value="7">Honeymoon</option>
+                        </select>
+                     </div>
+
+                     <div class="ml-5 flex items-center">
+                        <p class="text-kok-900 font-medium text-base">Amount</p>
+                        <select id="amount" name="amount"
+                                class="ml-2 rounded border block border-kyzyl-900 text-kok-900 focus:border-kok-900">
+                           <option>All</option>
+                           <option>1</option>
+                           <option>2</option>
+                           <option>3</option>
+                           <option>4</option>
+                           <option>5</option>
+                        </select>
+                     </div>
+
+                     <div class="ml-5 flex items-center">
+                        <p class="text-kok-900 font-medium text-base">Floor</p>
+                        <select id="floor" name="floor"
+                                class="ml-2 rounded border block border-kyzyl-900 text-kok-900 focus:border-kok-900">
+                           <option>All</option>
+                           <option>1</option>
+                           <option>2</option>
+                           <option>3</option>
+                           <option>4</option>
+                           <option>5</option>
+                        </select>
+                     </div>
+
+                     <div class="ml-10 flex">
+                        <button class="bg-kyzyl-900 text-bezh font-medium px-3 py-2 rounded flex items-center hover:bg-kok-900">
+                           <svg viewBox="0 0 512 512" width="20px" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M472,168H40a24,24,0,0,1,0-48H472a24,24,0,0,1,0,48Z"/><path d="M392,280H120a24,24,0,0,1,0-48H392a24,24,0,0,1,0,48Z"/><path d="M296,392H216a24,24,0,0,1,0-48h80a24,24,0,0,1,0,48Z"/></svg>
+                           <span class="ml-1">Filter</span>
+                        </button>
+                     </div>
+                  </form>
+               </div>
+               <div class="max-w-full">
+                   {% if rooms.first %}
+                  <table class="table-auto w-full">
+                     <thead>
+                        <tr class="bg-kyzyl-900 text-center ">
+                           <th class="w-2/12 rounded-tl-lg text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Room number
+                           </th>
+                           <th class="w-1/12  text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Status
+                           </th>
+                           <th class="w-2/12 text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Class
+                           </th>
+                           <th class="w-1/12  text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Floor
+                           </th>
+                           <th class="w-2/12  text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Room amount
+                           </th>
+                           <th class="w-2/12 text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              ECTS
+                           </th>
+                           <th class="w-1/12 text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Page
+                           </th>
+                           <th class="w-1/12 rounded-tr-lg text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Remove
+                           </th>
+                     </thead>
+
+                     <tbody>
+                        {% for room in rooms %}
+                        <tr>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                              {{ room.room_number }}
+                           </td>
+                           <td class="{% if room.status == 'A' %}
+                                      text-kok-700
+                                      {% else %}
+                                      text-kyzyl-700
+                                      {%endif%}
+                                      text-center font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                              <svg version="1.1" fill="currentColor" height="25px" class="mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 455 455"  xml:space="preserve">
+                                 <circle  cx="227.5" cy="227.5" r="227.5"/>
+                              </svg>
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                              {{ room.room_class }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                              {{ room.floor }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                              {{ room.room_amount }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-l border-[#E8E8E8]">
+                              {{ room.ects }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-r border-[#E8E8E8]">
+                              <a href="{% url 'room_page' room.pk %}" class="border border-kok-900  py-1 px-3 text-kok-900 inline-block rounded hover:text-bezh hover:bg-kok-900">
+                                 View
+                              </a>
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-r border-[#E8E8E8]">
+
+                              <a href="{% url 'remove_room' room.pk %}" class="border border-kok-900 bg-kyzyl-900 py-1 px-3 text-bezh inline-block rounded hover:text-bezh hover:bg-kok-900">
+                                 <svg width="1.5rem" fill="currentColor"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 380.598 380.598" xml:space="preserve">
+                                    <g><path d="M322.383,90.222h-2.84l0.436-11.816c0.368-10.004-3.254-19.481-10.201-26.689c-6.946-7.207-16.284-11.176-26.294-11.176 h-48.463V22.934C235.021,10.288,224.732,0,212.087,0h-43.576c-12.646,0-22.933,10.288-22.933,22.934V40.54H97.114 c-10.01,0-19.348,3.97-26.294,11.177c-6.947,7.207-10.569,16.686-10.2,26.688l0.436,11.816h-2.841c-8.284,0-15,6.716-15,15 s6.716,15,15,15h3.948l8.309,225.202c0.728,19.724,16.758,35.174,36.494,35.174h166.667c19.736,0,35.766-15.45,36.494-35.174 l8.309-225.202h3.947c8.284,0,15-6.716,15-15S330.667,90.222,322.383,90.222z M175.578,30h29.443v10.54h-29.443V30z M90.599,77.3 c-0.089-2.41,1.103-4.02,1.821-4.765s2.283-1.995,4.694-1.995h186.37c2.411,0,3.976,1.25,4.694,1.995 c0.718,0.745,1.909,2.355,1.82,4.765l-0.477,12.922H91.076L90.599,77.3z M280.147,344.318c-0.131,3.521-2.992,6.279-6.515,6.279 h-15.714V226.13c0-8.284-6.716-15-15-15s-15,6.716-15,15v124.468h-22.62V226.13c0-8.284-6.716-15-15-15s-15,6.716-15,15v124.468 h-22.621V226.13c0-8.284-6.716-15-15-15s-15,6.716-15,15v124.468h-15.713c-3.523,0-6.385-2.758-6.515-6.279l-8.268-224.097h196.232 L280.147,344.318z"/></g>
+                                 </svg>
+                              </a>
+                           </td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+
+                  </table>
+                   {% else %}
+                       <p class="w-full text-center text-2xl text-kyzyl-900 py-4" colspan="6">
+                            Rooms not found
+                       </p>
+                      {% endif %}
+               </div>
+            </div>
+         </section>
+      </div>
+
+   <div id="menu"  class="absolute top-0 left-0 right-0 z-10 justify-center items-center hidden">
+   <div class="w-full h-full bg-gray-900 bg-opacity-80 top-0 fixed sticky-0 ">
+     <div class="flex justify-center items-center">
+       <div class="w-200 mt-48 relative flex flex-col justify-center items-center rounded-lg bg-white py-16 px-4 md:px-24 xl:py-24 xl:px-36">
+         <div class="mt-5">
+
+           <form action="{% url 'add_room' %}" method="POST">
+                    {%csrf_token %}
+                 <div class="form-group mb-6">
+                   <label for="title" class="font-medium mb-3 text-kyzyl-900">Room number</label>
+                   <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-kok-900 focus:border-kok-900 focus:outline-none"
+                          id="number"
+                          name="number"
+                          placeholder="Room number">
+                 </div>
+
+
+                  <div class="form-group mb-6">
+                     <label class="font-medium mb-3 text-kyzyl-900">Class</label>
+                     <select id="class" name="class"
+                           class="form-control block w-full px-3 py-1.5 text-base font-normal text-kok-900 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-kok-900 focus:bg-white focus:border-kok-900 focus:outline-none">
+                              <option value="4">Bisiness</option>
+                              <option value="5">Family</option>
+                              <option value="3">Lux</option>
+                              <option value="6">First class</option>
+                              <option value="7">Honeymoon</option>
+                     </select>
+                  </div>
+
+                  <div class="form-group mb-6 flex justify-between">
+                     <div class="w-5/12">
+                        <label class="font-medium mb-3 text-kyzyl-900">Floor</label>
+                        <select id="floor" name="floor"
+                              class="form-control block w-full px-3 py-1.5 text-base font-normal text-kok-900 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-kok-900 focus:bg-white focus:border-kok-900 focus:outline-none">
+                                 <option value="1">1</option>
+                                 <option value="2">2</option>
+                                 <option value="3">3</option>
+                                 <option value="4">4</option>
+                                 <option value="5">5</option>
+                        </select>
+                     </div>
+
+                     <div class="w-5/12">
+                        <label class="font-medium mb-3 text-kyzyl-900">Room amount</label>
+                        <select id="amount" name="amount"
+                              class="form-control block w-full px-3 py-1.5 text-base font-normal text-kok-900 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0   focus:bg-white focus:border-kok-900 focus:outline-none">
+                                 <option value="1">1</option>
+                                 <option value="2">2</option>
+                                 <option value="3">3</option>
+                                 <option value="4">4</option>
+                        </select>
+                     </div>
+                  </div>
+
+                 <button type="submit"
+                         id="add"
+                         name="add"
+                         class=" w-full mt-5 px-6 py-2.5 bg-kyzyl-900 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-kok-900 hover:shadow-lg transition duration-150 ease-in-out">
+                   Add
+                 </button>
+           </form>
+         </div>
+
+         <button onclick="showMenu()" class="text-gray-800 dark:text-gray-400 absolute top-8 right-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800" aria-label="close">
+           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <path d="M18 6L6 18" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+             <path d="M6 6L18 18" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+           </svg>
+         </button>
+       </div>
+     </div>
+   </div>
+  </div>
+
+    <script>
+       let menu = document.getElementById("menu");
+           function showMenu() {
+               menu.classList.toggle("hidden");
+           }
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,127 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Registration rooms{% endblock %}
+
+{% block body %}
+      <div class="w-10/12">
+         <div class="h-16 border-b border-kok-900 flex align-center">
+            <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
+                <h5 hidden class="text-2xl text-kok-900 font-medium lg:block">Registration rooms</h5>
+            </div>
+        </div>
+        <section class="bg-white py-20">
+            <div class="w-11/12  mx-auto">
+               <form   action="{% url 'registration' %}"
+                       method="POST"
+                       class="flex justify-end mb-8">
+                  {% csrf_token %}
+                  <div class="flex items-center">
+                     <p class="text-kok-900 font-medium text-base">Class</p>
+                     <select id="class" name="class"
+                             class="ml-2 rounded border block border-kyzyl-900 text-kok-900 focus:border-kok-900">
+                        <option>All</option>
+                        <option value="4">Bisiness</option>
+                        <option value="3">Lux</option>
+                        <option value="5">Family</option>
+                        <option value="6">First class</option>
+                        <option value="7">Honeymoon</option>
+                     </select>
+                  </div>
+
+                  <div class="ml-5 flex items-center">
+                     <p class="text-kok-900 font-medium text-base">Amount</p>
+                     <select id="amount" name="amount"
+                             class="ml-2 rounded border block border-kyzyl-900 text-kok-900 focus:border-kok-900">
+                        <option>All</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                     </select>
+                  </div>
+
+                  <div class="ml-5 flex items-center">
+                     <p class="text-kok-900 font-medium text-base">Floor</p>
+                     <select id="floor" name="floor"
+                             class="ml-2 rounded border block border-kyzyl-900 text-kok-900 focus:border-kok-900">
+                        <option >All</option>
+                        <option >1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                     </select>
+                  </div>
+
+                  <div class="ml-10 flex">
+                     <button class="bg-kyzyl-900 text-bezh font-medium px-3 py-2 rounded flex items-center hover:bg-kok-900">
+                        <svg viewBox="0 0 512 512" width="20px" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M472,168H40a24,24,0,0,1,0-48H472a24,24,0,0,1,0,48Z"/><path d="M392,280H120a24,24,0,0,1,0-48H392a24,24,0,0,1,0,48Z"/><path d="M296,392H216a24,24,0,0,1,0-48h80a24,24,0,0,1,0,48Z"/></svg>
+                        <span class="ml-1">Filter</span>
+                     </button>
+                  </div>
+               </form>
+
+               <div class="max-w-full">
+                  {% if rooms_list.first %}
+                  <table class="table-auto w-full">
+                     <thead>
+                        <tr class="bg-kyzyl-900 text-center ">
+                           <th class="w-1/6 min-w-[160px] rounded-tl-lg text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Room number
+                           </th>
+                           <th class="w-1/6 min-w-[160px] text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Class
+                           </th>
+                           <th class="w-1/6 min-w-[160px] text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Floor
+                           </th>
+                           <th class="w-1/6 min-w-[160px] text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Room amount
+                           </th>
+                           <th class="w-1/6 min-w-[160px] text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              ECTS
+                           </th>
+                           <th class="w-1/6 min-w-[160px] rounded-tr-lg text-lg font-semibold text-bezh py-4 px-3 border-l border-transparent">
+                              Page
+                           </th>
+                     </thead>
+                     <tbody>
+                        {% for room in rooms_list %}
+                        <tr>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                              {{ room.room_number }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                              {{ room.room_class }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                              {{ room.floor }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                              {{ room.room_amount }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                              {{ room.ects }}
+                           </td>
+                           <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-r border-[#E8E8E8]">
+                              <a href="{% url 'registration_room' room.pk %}" class="border border-kok-900  py-1 px-3 text-kok-900 inline-block rounded hover:text-bezh hover:bg-kok-900">
+                                 Registration
+                              </a>
+                           </td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+                  {% else %}
+                     <p class="w-full text-center text-2xl text-kyzyl-900 py-4" colspan="6">
+                        Rooms not found
+                     </p>
+                  {% endif %}
+               </div>
+            </div>
+         </section>
+      </div>
+{% endblock %}
+
+

@@ -1,0 +1,122 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Payment room{% endblock %}
+
+{% block body %}
+    <div class="w-10/12">
+        <div class="h-16 border-b border-kok-900 flex align-center">
+            <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
+                <h5 hidden class="text-2xl text-kok-900 font-medium lg:block">Room payment</h5>
+            </div>
+        </div>
+        <div class="w-11/12  my-32 mx-auto">
+            <div class="flex w-full">
+                <div class="mr-4 w-4/6 ">
+                    <div class=" flex justify-between items-center rounded-md px-8 py-8 min-h-min border border-gray-200 bg-white shadow">
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.room_number }}</span> Room number</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.room_class }}</span> Status</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.floor }}</span> Floor</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center"><span class="text-kyzyl-900 font-bold text-4xl">{{ room.room_amount }}</span>Room amount</p>
+                        <div class="border-r border-gray-300 h-16 w-0"></div>
+                        <p class="text-kok-900 font-medium flex flex-col items-center px-4 bg-kyzyl-100 rounded "><span class="text-kyzyl-900 font-bold text-4xl">{{ room.ects }}</span>ECTS</p>
+                    </div>
+
+                    <div class="mt-8 px-8 py-8 rounded-md border border-gray-200 bg-white shadow">
+                        <p class="text-kyzyl-900 font-medium text-2xl">Clients in the room</p>
+
+                        <div class="mt-5 w-full">
+                            <table class="table-auto w-full">
+                            <thead>
+                                <tr class="bg-kyzyl-900 text-center text-bezh">
+                                    <th class="rounded-tl-lg text-lg py-2 px-2 text-bezh  border-l border-transparent">
+                                        Name
+                                    </th>
+                                    <th class="text-lg py-2 px-2 border-l border-transparent">
+                                        Surname
+                                    </th>
+                                    <th class="text-lg py-2 px-2 border-l border-transparent">
+                                        Phone
+                                    </th>
+                                    <th class="text-lg py-2 px-2 border-l border-transparent">
+                                        Email
+                                    </th>
+                                    <th class="rounded-tr-lg text-lg py-2 px-2 border-l border-transparent">
+                                        Gender
+                                    </th>
+                            </thead>
+                            <tbody>
+                            {% for client in clients %}
+                                <tr>
+                                    <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                        {{ client.first_name }}
+                                    </td>
+                                    <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                                        {{ client.last_name }}
+                                    </td>
+                                    <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                        {{ client.phone }}
+                                    </td>
+                                    <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                                        {{ client.email }}
+                                    </td>
+                                    <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                        {{ client.gender }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="ml-4 w-2/6 ">
+
+                    <div class="px-8 py-12 rounded-md border border-kyzyl-200 bg-white shadow">
+                        <table class="table-auto text-xl">
+                            <tbody>
+                                <tr>
+                                    <td class="text-kok-900">
+                                        Room ECTS:
+                                    </td>
+                                    <td class="text-kyzyl-900 font-medium block ml-14">
+                                        2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-kok-900">
+                                        Date entered:
+                                    </td>
+                                    <td class="text-kyzyl-900 font-medium block ml-14">
+                                        {{ entered_datetime }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-kok-900">
+                                        Date left:
+                                    </td>
+                                    <td class="text-kyzyl-900 font-medium block ml-14">
+                                        {{ current_datetime }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="w-full h-0 my-10 border-b border-kok-900"></div>
+
+                        <p class="text-2xl text-kok-900 text-right">Total ECTS: <span class="text-kyzyl-900 ml-3 font-medium">{{ total_ects }}</span></p>
+                        <p class="text-3xl text-kok-900 text-right">To pay: <span class="text-kyzyl-900 ml-3 font-medium">{{ total_price }} $</span></p>
+
+                        <a href="{% url 'pay' registration.pk %}" class="bg-kyzyl-900 text-bezh font-medium text-xl mt-10 px-3 py-2 rounded flex items-center justify-center hover:bg-kok-900">
+                          <span>Pay</span>
+                       </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
