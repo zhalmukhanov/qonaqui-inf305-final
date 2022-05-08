@@ -24,6 +24,88 @@
                         <p class="text-kok-900 font-medium flex flex-col items-center px-4 bg-kyzyl-100 rounded "><span class="text-kyzyl-900 font-bold text-4xl">{{ room.ects }}</span>ECTS</p>
                     </div>
                     <div class="mt-8 rounded-md px-8 py-8 min-h-min border border-gray-200 bg-white shadow">
+                        <p class="text-kyzyl-900 font-medium text-2xl">Search client</p>
+
+                        <div class="mt-8">
+                            <form   action="{% url 'registration_room' room.pk %}"
+                                    method="POST"
+                                    class="flex justify-between w-full ">
+                                {% csrf_token %}
+                                <div class="w-4/12">
+                                    <span class="text-kok-900">Client name</span>
+                                    <input
+                                    type="text"
+                                    id="search_name"
+                                    name="search_name"
+                                    class="mt-0 block w-full px-0.5  border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                                    placeholder="Kairat"/>
+                                </div>
+                                <div class="w-4/12">
+                                    <span class="text-kok-900">Client surname</span>
+                                    <input
+                                    type="text"
+                                    id="search_surname"
+                                    name="search_surname"
+                                    class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                                    placeholder="Nurtas"/>
+                                </div>
+
+                                <div class="w-2/12">
+                                    <button class="justify-self-end bg-kyzyl-900 text-bezh font-medium px-6 ml-auto my-4 py-3 rounded flex items-center hover:bg-kok-900">
+                                      <p>Search</p>
+                                     </button>
+                                </div>
+
+                            </form>
+
+                            {% if search_clients %}
+                                <table class="table-auto w-full mt-5">
+                           <thead>
+                              <tr class="bg-kyzyl-900 text-center text-bezh">
+                                <th class="rounded-tl-lg text-lg py-2 px-2 text-bezh  border-l border-transparent">
+                                    Name
+                                 </th>
+                                 <th class="text-lg py-2 px-2 border-l border-transparent">
+                                    Surname
+                                 </th>
+                                 <th class="text-lg py-2 px-2 border-l border-transparent">
+                                    Phone
+                                 </th>
+                                 <th class="text-lg py-2 px-2 border-l border-transparent">
+                                    Email
+                                 </th>
+                                 <th class="rounded-tr-lg text-lg py-2 px-2 border-l border-transparent">
+                                    Add
+                                 </th>
+                           </thead>
+                           <tbody>
+                                {% for search_client in search_clients %}
+                                <tr>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                    {{ search_client.first_name }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                                    {{ search_client.last_name }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                    {{ search_client.phone }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-white border-b border-[#E8E8E8]">
+                                    {{ search_client.email }}
+                                 </td>
+                                 <td class="text-center text-kok-900 font-medium text-base py-2 px-2 bg-[#F3F6FF] border-b border-l border-[#E8E8E8]">
+                                    <a href="{% url 'add_search_client' room.pk search_client.pk %}" class="border border-kok-900  py-1 px-3 text-kok-900 inline-block rounded hover:text-bezh hover:bg-kok-900">
+                                         add
+                                    </a>
+                                 </td>
+                              </tr>
+                                {% endfor %}
+                           </tbody>
+                        </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="mt-8 rounded-md px-8 py-8 min-h-min border border-gray-200 bg-white shadow">
                         <p class="text-kyzyl-900 font-medium text-2xl">Add client</p>
 
                         <div class="mt-8">

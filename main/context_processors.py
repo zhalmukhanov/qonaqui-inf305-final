@@ -2,6 +2,7 @@ from django.urls import resolve
 
 def message_processor(request):
     url_name = resolve(request.path_info).url_name
+
     if url_name == 'dashboard':
         num = 1
     elif url_name == 'registration':

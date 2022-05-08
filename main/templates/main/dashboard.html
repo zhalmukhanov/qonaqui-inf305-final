@@ -16,22 +16,22 @@
                 <div class="w-5/12">
                     <div class="h-full py-6 px-6 rounded-md border border-gray-200 bg-white shadow">
                         <div class="mb-8 mt-2 flex flex-col items-center">
-                            <div style="--value:62" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" ></div>
+                            <div style="--value:{{percentage.all_percentage}}" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" ></div>
                             <p class="mt-6 text-xl text-kok-900 ">Occupancy rate</p>
                         </div>
                         <table class="mt-6 -mb-2 w-full text-kok-900">
                             <tbody>
                                 <tr>
-                                    <td class="py-2">In presidential rooms</td>
-                                    <td class="text-kyzyl-900">28,8%</td>
+                                    <td class="py-2">In First class rooms</td>
+                                    <td class="text-kyzyl-900">{{percentage.first_percentage}}%</td>
                                 </tr>
                                 <tr>
                                     <td class="py-2">In luxury rooms</td>
-                                    <td class="text-kyzyl-900">67%</td>
+                                    <td class="text-kyzyl-900">{{percentage.lux_percentage}}%</td>
                                 </tr>
                                 <tr>
                                     <td class="py-2">In family rooms</td>
-                                    <td class="text-kyzyl-900">45,6%</td>
+                                    <td class="text-kyzyl-900">{{percentage.family_percentage}}%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -40,7 +40,7 @@
                 <div class="w-7/12 flex justify-center">
                     <div class="h-full ml-8 w-3/6 py-6 px-6 rounded-md border border-gray-200 bg-white shadow flex flex-col items-center justify-center">
                         <div class="flex flex-col items-center mt-4">
-                            <h1 class="text-7xl font-medium text-kyzyl-900">64</h1>
+                            <h1 class="text-7xl font-medium text-kyzyl-900">{{available_rooms.all}}</h1>
                             <p class="mt-2 text-xl text-kok-900 ">Available rooms</p>
                         </div>
                         <hr class="w-full border-kok-900 my-8 mt-14 mx-2">
@@ -53,7 +53,7 @@
                                     "labels": ["Lux", "Family", "Bisiness", "First class", "Honeymoon"],
                                     "datasets": [{
                                         "label": "Issues",
-                                        "data": [17, 23, 8, 11, 5],
+                                        "data": [{{available_rooms.lux}}, {{available_rooms.family}}, {{available_rooms.bisiness}}, {{available_rooms.first}}, {{available_rooms.honeymoon}}],
                                         "backgroundColor": ["#780000", "#FF7878", "#003049", "#4EBBF2", "#B8E7FF"]
                                     }]
                                 }
@@ -74,7 +74,7 @@
 
                         <div class="flex flex-col items-center mt-4">
                             <p class="text-xl text-kok-900 ">Guests currently</p>
-                            <h1 class="mt-2 mb-14 text-7xl font-medium text-kyzyl-900">251</h1>
+                            <h1 class="mt-2 mb-14 text-7xl font-medium text-kyzyl-900">{{client}}</h1>
                         </div>
                     </div>
                 </div>
@@ -91,10 +91,10 @@
                         "type": "bar",
                         "data": {
                             //
-                            "labels": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "07.05.2022"],
+                            "labels": ["{{revenue.one.date}}", "{{revenue.two.date}}", "{{revenue.three.date}}", "{{revenue.four.date}}", "{{revenue.five.date}}", "{{revenue.six.date}}", "{{revenue.seven.date}}"],
                             "datasets": [{
                                 "label": "Revenue",
-                                "data": [6500, 5900, 4000, 5000, 5600, 7800, 8900],
+                                "data": [{{revenue.one.cost.cost__sum}}, {{revenue.two.cost.cost__sum}}, {{revenue.three.cost.cost__sum}}, {{revenue.four.cost.cost__sum}}, {{revenue.five.cost.cost__sum}}, {{revenue.six.cost.cost__sum}}, {{revenue.seven.cost.cost__sum}}],
                                 "fill": false,
                                 "backgroundColor": ["rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)", "rgba(255, 32, 32, 0.25)",],
                                 "borderColor": ["#780000", "#780000", "#780000","#780000","#780000","#780000","#780000",],

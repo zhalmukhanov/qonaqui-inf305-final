@@ -9,6 +9,7 @@ urlpatterns = [
     path('registration/', registration, name='registration'),
     path('registration/room/<int:pk>', registration_room, name='registration_room'),
     path('add_client/<int:pk>', add_client, name='add_client'),
+    path('add_search_client/<int:pk>/<int:id>', add_search_client, name='add_search_client'),
 
     path('rooms/', rooms, name='rooms'),
     path('room_page/<int:pk>', room_page, name='room_page'),

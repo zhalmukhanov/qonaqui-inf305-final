@@ -2,6 +2,7 @@ import room
 from django.db import models
 from django.db.models import SET_NULL
 from .models import *
+
 from django.utils import timezone
 # Create your models here.
 
@@ -42,7 +43,7 @@ class Client(models.Model):
                ('Female', 'Female')]
     gender = models.CharField(choices=genders, max_length=10)
     room = models.ForeignKey(Room, on_delete=models.SET_NULL, blank=True, null=True)
-    registration = models.ForeignKey(Registeration, on_delete=models.CASCADE)
+    registration = models.ForeignKey(Registeration, on_delete=models.SET_NULL, blank=True, null=True)
 
 
     def __str__(self):
@@ -55,7 +56,7 @@ class History(models.Model):
     date_left = models.DateTimeField()
 
     def __str__(self):
-        return self.room
+        return str(self.room.room_number)
 
     def date_entered_format(self):
         return self.date_left.strftime('%d-%m-%Y')
